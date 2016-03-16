@@ -17,7 +17,7 @@ The package also includes the Small- and the BigCrush batteries. Some examples:
 ```julia
 julia> using RNGTest
 julia> RNGTest.smallcrushJulia(rand)
-julia> using Distribtions
+julia> using Distributions
 julia> gf() = cdf(Gamma(), rand(Gamma()));
 julia> RNGTest.bigcrushJulia(gf)
 julia> rng = RNGTest.wrap(MersenneTwister(), UInt32)

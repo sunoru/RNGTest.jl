@@ -1,7 +1,6 @@
 language: julia
 
-os:
-  - linux
+os: - linux
   - osx
 
 compiler:
@@ -19,6 +18,4 @@ notifications:
     on_success: never
 
 script:
-  - julia -e 'Pkg.init(); Pkg.add("RNGTest")'
-  - julia -e 'using RNGTest; @assert isdefined(:RNGTest); @assert typeof(RNGTest) === Module'
-  - julia test/runtests.jl
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("RNGTest"); Pkg.test("RNGTest", coverage=true)'

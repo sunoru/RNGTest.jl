@@ -35,7 +35,7 @@ module RNGTest
 
     function WrappedRNG{RNG, T}(rng::RNG, ::Type{T}, fillarray = true, cache_size = 3*2^11 ÷ sizeof(T))
         if T <: Integer && cache_size*sizeof(T) % sizeof(UInt32) != 0
-            error("cache_size must be a multiple of $(Int(4/sizeof(T))) (for type $T)")
+            error("cache_size must be a multiple of $(4÷sizeof(T)) (for type $T)")
         elseif T === Float16 && cache_size % 6 != 0 || T === Float32 && cache_size % 3 != 0
             error("cache_size must be a multiple of 3 (resp. 6) for Float32 (resp. Float16)")
         end
