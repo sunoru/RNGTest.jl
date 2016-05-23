@@ -63,17 +63,17 @@ module RNGTest
         return g
     end
 
-    function call{T<:Integer}(g::WrappedRNG{T})
+    function (g::WrappedRNG{T}){T<:Integer}()
         g.idx+1 > length(g.vals) && fillcache(g)
         @inbounds return g.vals[g.idx+=1]
     end
 
-    function call(g::WrappedRNG{Float64})
+    function (g::WrappedRNG{Float64})()
         g.idx+1 > length(g.cache) && fillcache(g)
         @inbounds return g.cache[g.idx+=1]
     end
 
-    function call(g::WrappedRNG{Float32})
+    function (g::WrappedRNG{Float32})()
         g.idx+3 > length(g.cache) && fillcache(g)
         @inbounds begin
             f = Float64(g.cache[g.idx+1])
@@ -84,7 +84,7 @@ module RNGTest
         end
     end
 
-    function call(g::WrappedRNG{Float16})
+    function (g::WrappedRNG{Float16})()
         g.idx+6 > length(g.cache) && fillcache(g)
         @inbounds begin
             f = Float64(g.cache[g.idx+1])
